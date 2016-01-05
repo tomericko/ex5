@@ -20,7 +20,7 @@ using namespace std;
 int main(int argc, char* argv[]) {
 	TCPServer* server;
 	int status;
-	if(argc-1!= 2){
+	if(argc-1 != 2){
 		cout<<"Missing arguments - exit"<<endl;
 		return 0;
 	}

@@ -21,6 +21,14 @@ private:
 	static TCPServer* serv;
 	static bool serverConstruct;
 	static pthread_mutex_t lock;
+
+	/*******************************************************************************
+	 * function name : TCPServer												       *
+	 * input : nothing.														       *
+	 * output : ip as string.												       *
+	 * explanation : constructor of a TCPServer.									   *
+	 *******************************************************************************/
+	TCPServer(int port);
 public:
 	static TCPServer* getServerIns(int port);
 	 /*******************************************************************************
@@ -31,13 +39,7 @@ public:
 	 *******************************************************************************/
 	~TCPServer();
 
-	/*******************************************************************************
-	 * function name : TCPServer												       *
-	 * input : nothing.														       *
-	 * output : ip as string.												       *
-	 * explanation : constructor of a TCPServer.									   *
-	 *******************************************************************************/
-	TCPServer(int port);
+
 
 	/*******************************************************************************
 	* function name : connect												       *

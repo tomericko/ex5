@@ -7,9 +7,9 @@
 
 #include "MoviesSystem.h"
 
-MoviesSystem* MoviesSystem::instance = NULL;
-pthread_mutex_t lock = 0;
-bool isConstruct = false;
+MoviesSystem* MoviesSystem::instance;
+bool MoviesSystem::isConstruct;
+pthread_mutex_t MoviesSystem::lock;
 /*******************************************************************************
  * function name : ~MoviesSystem										       *
  * input : nothing														       *
@@ -86,7 +86,7 @@ void MoviesSystem::setServer(Server* serv){
  *******************************************************************************/
 
 void* MoviesSystem::start(void* var) {
-	int* answer=0;
+	int* answer= new int(0);
 	do {
 		*answer = MoviesSystem::getInstance()->getCommand();
 		sleep(1);
