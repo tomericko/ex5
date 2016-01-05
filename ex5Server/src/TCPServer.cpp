@@ -1,4 +1,7 @@
 #include "TCPServer.h"
+#include <map>
+#include <thread>
+
 
 TCPServer* TCPServer::serv;
 bool TCPServer::serverConstruct;
@@ -16,6 +19,7 @@ TCPServer::TCPServer(int port) :
 	this->createSocket();
 	this->bindSocket();
 	this->connect();
+	map<char, pthread_t> m;
 
 }
 
@@ -147,6 +151,7 @@ void TCPServer::sendData(string data) {
 	if (sent_bytes < 0) {
 		perror("error sending to client");
 	}
+
 }
 
 /*******************************************************************************
@@ -166,4 +171,5 @@ void TCPServer::dataReceiver() {
 		perror("error reading from client");
 	}
 	this->dataReceived = buffer;
+
 }

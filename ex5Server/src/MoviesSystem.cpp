@@ -6,6 +6,7 @@
  */
 
 #include "MoviesSystem.h"
+#include <thread>
 
 MoviesSystem* MoviesSystem::instance;
 bool MoviesSystem::isConstruct;
@@ -29,6 +30,7 @@ MoviesSystem::~MoviesSystem() {
 			it != this->types.end(); ++it) {
 		delete (*it);
 	}
+
 }
 
 
@@ -101,7 +103,6 @@ void* MoviesSystem::start(void* var) {
  * explanation : getting and operating the next command					       *
  *******************************************************************************/
 int MoviesSystem::getCommand() {
-
 	this->server->dataReceiver();
 	string data = this->server->getDataReceived();
 	vector<string> dat = this->split(data," ");

@@ -20,6 +20,8 @@ using namespace std;
 int main(int argc, char* argv[]) {
 	TCPServer* server;
 	int status;
+	int a = getpid();
+
 	if(argc-1 != 2){
 		cout<<"Missing arguments - exit"<<endl;
 		return 0;
@@ -37,7 +39,8 @@ int main(int argc, char* argv[]) {
 	server = TCPServer::getServerIns(port);
 	MoviesSystem::getInstance()->setServer(server);
 
-	pthread_t srv;
+	server->threadFactory(NULL);
+	/*pthread_t srv;
 	status = pthread_create(&srv,NULL,server->threadFactory,NULL);
 	if(status != 0){
 		//error
@@ -46,7 +49,7 @@ int main(int argc, char* argv[]) {
 	int size = server->getServerIns(port)->getThreads().size();
 	for (int i = 0; i < size; i++) {
 		pthread_join(server->getServerIns(port)->getThreads().at(i), NULL);
-	}
+	}*/
 
 
 	//starting the movies system.
