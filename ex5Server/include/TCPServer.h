@@ -19,8 +19,8 @@ private:
 	struct sockaddr_in client_sin;
 	int client_sock;
 	static TCPServer* serv;
-	static bool serverConstruct;
-	static pthread_mutex_t lock;
+	bool serverConstruct;
+	pthread_mutex_t lock;
 public:
 	static TCPServer* getServerIns(int port);
 	 /*******************************************************************************
