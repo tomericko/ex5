@@ -43,9 +43,9 @@ int main(int argc, char* argv[]) {
 		//error
 	}
 	server->addThread(srv);
-	while (server->getServerIns(port)->getThreads().size() != 0) {
-		pthread_join(server->getServerIns(port)->getThreads().back(), NULL);
-		server->getServerIns(port)->getThreads().pop_back();
+	int size = server->getServerIns(port)->getThreads().size();
+	for (int i = 0; i < size; i++) {
+		pthread_join(server->getServerIns(port)->getThreads().at(i), NULL);
 	}
 
 
