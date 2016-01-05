@@ -2,7 +2,7 @@
 
 TCPServer* serv = NULL;
 bool serverConstruct = false;
-pthread_mutex_t lock=PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t lock = 0;
 /*******************************************************************************
  * function name : TCPServer												       *
  * input : nothing.														       *
@@ -123,7 +123,7 @@ void* TCPServer::threadFactory(void* var){
 	int statusCreate;
 	while(true){
 		pthread_t ptrd;
-		TCPServer::connEstablish();
+		serv->connEstablish();
 		statusCreate = pthread_create(&ptrd,NULL,ms->start,NULL);
 		if(statusCreate != 0){
 			//error
