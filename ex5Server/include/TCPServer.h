@@ -18,17 +18,8 @@ class TCPServer: public Server {
 private:
 	struct sockaddr_in client_sin;
 	int client_sock;
-	static TCPServer* serv;
-	static bool serverConstruct;
-	static pthread_mutex_t lock;
 
-	/*******************************************************************************
-	 * function name : TCPServer												       *
-	 * input : nothing.														       *
-	 * output : ip as string.												       *
-	 * explanation : constructor of a TCPServer.									   *
-	 *******************************************************************************/
-	TCPServer(int port);
+
 public:
 	static TCPServer* getServerIns(int port);
 	 /*******************************************************************************
@@ -39,6 +30,13 @@ public:
 	 *******************************************************************************/
 	~TCPServer();
 
+	/*******************************************************************************
+	 * function name : TCPServer												       *
+	 * input : nothing.														       *
+	 * output : ip as string.												       *
+	 * explanation : constructor of a TCPServer.									   *
+	 *******************************************************************************/
+	TCPServer(int port);
 
 
 	/*******************************************************************************
@@ -56,7 +54,7 @@ public:
 	 * explanation : creating a socket.											   *
 	 *******************************************************************************/
 	void connEstablish();
-	static void* threadFactory(void* var);
+	void threadFactory();
 	/*******************************************************************************
 	* function name : getDataReceived										       *
 	* input : nothing.														       *

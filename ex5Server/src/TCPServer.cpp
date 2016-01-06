@@ -3,9 +3,6 @@
 #include <thread>
 
 
-TCPServer* TCPServer::serv;
-bool TCPServer::serverConstruct;
-pthread_mutex_t TCPServer::lock;
 /*******************************************************************************
  * function name : TCPServer											       *
  * input : nothing.														       *
@@ -23,20 +20,6 @@ TCPServer::TCPServer(int port) :
 
 }
 
-TCPServer* TCPServer::getServerIns(int port){
-	if(!serverConstruct){
-
-		pthread_mutex_lock(&lock);
-		if(!serverConstruct){
-			TCPServer::serv = new TCPServer(port);
-			serverConstruct = true;
-		}
-		pthread_mutex_unlock(&lock);
-
-	}
-
-	return serv;
-}
 /*******************************************************************************
  * function name : ~TCPServer											       *
  * input : nothing.														       *
@@ -119,19 +102,18 @@ void TCPServer::connEstablish() {
 
 }
 
-void* TCPServer::threadFactory(void* var){
+void TCPServer::threadFactory(){
 	MoviesSystem* ms = MoviesSystem::getInstance();
 	int statusCreate;
 	while(true){
 		pthread_t ptrd;
-		serv->connEstablish();
-		statusCreate = pthread_create(&ptrd,NULL,ms->start,NULL);
+		this->connEstablish();
+		statusCreate = pthread_create(&ptrd,NULL,ms->start,&this->client_sock);
 		if(statusCreate != 0){
 			//error
 		}
-		serv->addThread(ptrd);
+		this->addThread(ptrd);
 	}
-	return NULL;
 }
 
 /*******************************************************************************

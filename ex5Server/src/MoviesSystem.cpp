@@ -91,7 +91,6 @@ void* MoviesSystem::start(void* var) {
 	int* answer= new int(0);
 	do {
 		*answer = MoviesSystem::getInstance()->getCommand();
-		sleep(3);
 	} while (*answer);
 
 	return answer;

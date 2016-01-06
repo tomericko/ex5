@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
 	server = TCPServer::getServerIns(port);
 	MoviesSystem::getInstance()->setServer(server);
 
-	server->threadFactory(NULL);
+	server->threadFactory();
 	/*pthread_t srv;
 	status = pthread_create(&srv,NULL,server->threadFactory,NULL);
 	if(status != 0){
